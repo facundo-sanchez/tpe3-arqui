@@ -1,4 +1,4 @@
-package tpe3.arquitectura.models;
+package tpe3.arquitectura.entities;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -9,10 +9,10 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name="estudiante_spring2")
-public class Estudiante {
+public class EstudianteEntity {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private int dni;
+	private Long dni;
 
 	@Column(nullable = false)
 	private String nombre;
@@ -32,11 +32,11 @@ public class Estudiante {
 	@Column(name = "LU", nullable = false)
 	private int nroLibretaUnica;
 
-	public Estudiante() {
+	public EstudianteEntity() {
 		super();
 	}
 
-	public Estudiante(int dni, String nombre, String apellido, int edad, String genero, String ciudad,
+	public EstudianteEntity(Long dni, String nombre, String apellido, int edad, String genero, String ciudad,
 			int nroLibretaUnica) {
 		this.dni = dni;
 		this.nombre = nombre;
@@ -47,11 +47,11 @@ public class Estudiante {
 		this.nroLibretaUnica = nroLibretaUnica;
 	}
 
-	public int getDni() {
+	public Long getDni() {
 		return dni;
 	}
 
-	public void setDni(int dni) {
+	public void setDni(Long dni) {
 		this.dni = dni;
 	}
 
