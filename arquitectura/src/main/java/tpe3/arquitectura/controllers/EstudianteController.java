@@ -18,7 +18,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import tpe3.arquitectura.dto.EstudianteDto;
-import tpe3.arquitectura.entities.EstudianteEntity;
 import tpe3.arquitectura.services.EstudianteServiceImpl;
 
 @RestController
@@ -48,6 +47,7 @@ public class EstudianteController {
 	@GetMapping
 	public ResponseEntity<?> getEstudiantes(@RequestParam(name = "order", required = false) String order,
 			@RequestParam(name = "genero", required = false) String genero) {
+		Map<String, Object> response = new HashMap<>();
 		try {
 			List<EstudianteDto> estudiantes = new ArrayList<EstudianteDto>();
 
@@ -55,24 +55,44 @@ public class EstudianteController {
 
 			return new ResponseEntity<List<EstudianteDto>>(estudiantes, HttpStatus.OK);
 		} catch (DataAccessException e) {
-			Map<String, Object> response = new HashMap<>();
 			response.put("mensaje", "Error al realizar la consulta en la base de datos");
 			response.put("error", e.getMessage().concat(": ").concat(e.getMostSpecificCause().getMessage()));
 			return new ResponseEntity<Map<String, Object>>(response, HttpStatus.INTERNAL_SERVER_ERROR);
 		}
 	}
 
-	@GetMapping("/:nroLibreta")
-	public ResponseEntity<?> getEstudianteByNroLibreta(@PathVariable int nroLibreta) {
+	@GetMapping("/{id}")
+	public ResponseEntity<?> getEstudianteById(@PathVariable Long id) {
+		Map<String, Object> response = new HashMap<>();
 		try {
-			EstudianteDto result = this.estudianteService.findByNroLibreta(nroLibreta);
+			EstudianteDto result = this.estudianteService.findById(id);
 
-			if (result == null)
-				return new ResponseEntity<String>("No se encontro el usuario con numero de libreta "+nroLibreta, HttpStatus.NOT_FOUND);
+			if (result == null) {
+				response.put("mensaje", "No se encontro el usuario con el id " + id);
+				return new ResponseEntity<Map<String, Object>>(response, HttpStatus.NOT_FOUND);
+			}
 
 			return new ResponseEntity<EstudianteDto>(result, HttpStatus.OK);
 		} catch (DataAccessException e) {
-			Map<String, Object> response = new HashMap<>();
+			response.put("message", "Error al realizar la consulta en la base de datos");
+			response.put("error", e.getMessage().concat(": ").concat(e.getMostSpecificCause().getMessage()));
+			return new ResponseEntity<Map<String, Object>>(response, HttpStatus.INTERNAL_SERVER_ERROR);
+		}
+	}
+
+	@GetMapping("nroLibreta/{nroLibreta}")
+	public ResponseEntity<?> getEstudianteByNroLibreta(@PathVariable int nroLibreta) {
+		Map<String, Object> response = new HashMap<>();
+		try {
+			EstudianteDto result = this.estudianteService.findByNroLibreta(nroLibreta);
+
+			if (result == null) {
+				response.put("message", "No se encontro el usuario con numero de libreta " + nroLibreta);
+				return new ResponseEntity<Map<String, Object>>(response, HttpStatus.NOT_FOUND);
+			}
+
+			return new ResponseEntity<EstudianteDto>(result, HttpStatus.OK);
+		} catch (DataAccessException e) {
 			response.put("mensaje", "Error al realizar la consulta en la base de datos");
 			response.put("error", e.getMessage().concat(": ").concat(e.getMostSpecificCause().getMessage()));
 			return new ResponseEntity<Map<String, Object>>(response, HttpStatus.INTERNAL_SERVER_ERROR);
