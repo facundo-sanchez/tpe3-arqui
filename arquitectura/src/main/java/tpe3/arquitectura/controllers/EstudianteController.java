@@ -17,6 +17,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.sun.net.httpserver.Authenticator.Result;
+
 import tpe3.arquitectura.dto.EstudianteCarreraDto;
 import tpe3.arquitectura.dto.EstudianteDto;
 import tpe3.arquitectura.services.EstudianteCarreraServiceImpl;
@@ -50,7 +52,6 @@ public class EstudianteController {
 		}
 	}
 
-	// http://localhost:8080/estudiante?order=asc&genero=masculino
 	@GetMapping
 	public ResponseEntity<?> getEstudiantes(
 			@RequestParam(name = "order", required = false, defaultValue = "asc") String order,
@@ -61,7 +62,10 @@ public class EstudianteController {
 
 			estudiantes = this.estudianteService.findAll(order, genero);
 
-			return new ResponseEntity<List<EstudianteDto>>(estudiantes, HttpStatus.OK);
+			response.put("total", estudiantes.size());
+			response.put("estudiantes", estudiantes);
+
+			return new ResponseEntity<Map<String, Object>>(response, HttpStatus.OK);
 		} catch (DataAccessException e) {
 			response.put("mensaje", "Error al realizar la consulta en la base de datos");
 			response.put("error", e.getMessage().concat(": ").concat(e.getMostSpecificCause().getMessage()));
