@@ -19,45 +19,58 @@ public class EstudianteServiceImpl implements EstudianteService {
 
 	@Override
 	public List<EstudianteDto> findAll(String order, String genero) {
-		List<EstudianteEntity> result = this.estudianteRepository.findEstudiantesByGeneroOrOrder(order, genero);
+		try {
+			List<EstudianteEntity> result = this.estudianteRepository.findEstudiantesByGeneroOrOrder(order, genero);
 
-		List<EstudianteDto> estudiantes = EstudianteMapper.entityListToModelList(result);
-		return estudiantes;
+			return EstudianteMapper.entityListToModelList(result);
+		} catch (Exception e) {
+			return null;
+		}
+
 	}
 
 	@Override
 	public EstudianteDto findById(Long id) {
-		Optional<EstudianteEntity> result = this.estudianteRepository.findById(id);
+		try {
+			Optional<EstudianteEntity> result = this.estudianteRepository.findById(id);
 
-		if (!result.isPresent())
+			if (!result.isPresent())
+				return null;
+
+			EstudianteEntity estudiante = result.get();
+
+			return EstudianteMapper.entityToModel(estudiante);
+		} catch (Exception e) {
 			return null;
+		}
 
-		EstudianteEntity estudiante = result.get();
-		EstudianteDto response = EstudianteMapper.entityToModel(estudiante);
-		return response;
 	}
 
 	@Override
 	public EstudianteDto findByNroLibreta(int nroLibreta) {
-		EstudianteEntity result = this.estudianteRepository.findByNroLibreta(nroLibreta);
+		try {
+			EstudianteEntity result = this.estudianteRepository.findByNroLibreta(nroLibreta);
 
-		EstudianteDto estudiante = EstudianteMapper.entityToModel(result);
+			return EstudianteMapper.entityToModel(result);
+		} catch (Exception e) {
+			return null;
+		}
 
-		return estudiante;
 	}
 
 	@Override
 	public EstudianteDto save(EstudianteDto estudiante) {
-		EstudianteEntity entity = new EstudianteEntity();
+		try {
+			EstudianteEntity entity = new EstudianteEntity();
 
-		entity = EstudianteMapper.modelToEntity(estudiante);
+			entity = EstudianteMapper.modelToEntity(estudiante);
 
-		EstudianteEntity result = this.estudianteRepository.save(entity);
+			EstudianteEntity result = this.estudianteRepository.save(entity);
 
-		if (result == null)
+			return EstudianteMapper.entityToModel(result);
+		} catch (Exception e) {
 			return null;
-
-		return estudiante;
+		}
 	}
 
 	@Override

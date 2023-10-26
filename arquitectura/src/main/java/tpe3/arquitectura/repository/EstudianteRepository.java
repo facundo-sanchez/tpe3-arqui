@@ -12,7 +12,7 @@ import tpe3.arquitectura.entities.EstudianteEntity;
 @Repository
 public interface EstudianteRepository extends JpaRepository<EstudianteEntity, Long> {
 
-	@Query("SELECT e FROM EstudianteEntity e WHERE (:genero IS NULL OR e.genero = :genero) ORDER BY CASE WHEN :order = 'asc' THEN e.nombre END ASC, CASE WHEN :order = 'desc' THEN e.nombre END DESC")
+	@Query("SELECT e FROM EstudianteEntity e WHERE (e.genero LIKE %:genero%) ORDER BY CASE WHEN :order = 'asc' THEN e.nombre END ASC, CASE WHEN :order = 'desc' THEN e.nombre END DESC")
 	List<EstudianteEntity> findEstudiantesByGeneroOrOrder(@Param("order") String order, @Param("genero") String genero);
 
 //	

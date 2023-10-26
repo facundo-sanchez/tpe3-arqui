@@ -17,7 +17,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import tpe3.arquitectura.dto.EstudianteCarreraDto;
 import tpe3.arquitectura.dto.EstudianteDto;
+import tpe3.arquitectura.services.EstudianteCarreraServiceImpl;
 import tpe3.arquitectura.services.EstudianteServiceImpl;
 
 @RestController
@@ -27,16 +29,21 @@ public class EstudianteController {
 	@Autowired
 	private EstudianteServiceImpl estudianteService;
 
+	@Autowired
+	private EstudianteCarreraServiceImpl estudianteCarreraService;
+
 	@PostMapping
 	public ResponseEntity<?> addEstudiante(@RequestBody EstudianteDto estudiante) {
+		Map<String, Object> response = new HashMap<>();
 		try {
 			EstudianteDto result = this.estudianteService.save(estudiante);
-			if (result == null)
-				return new ResponseEntity<String>("Hubo un error al crear el estudiante", HttpStatus.BAD_REQUEST);
+			if (result == null) {
+				response.put("message", "Hubo un error al crear el estudiante");
+				return new ResponseEntity<Map<String, Object>>(response, HttpStatus.BAD_REQUEST);
+			}
 
 			return new ResponseEntity<EstudianteDto>(result, HttpStatus.CREATED);
 		} catch (DataAccessException e) {
-			Map<String, Object> response = new HashMap<>();
 			response.put("mensaje", "Error al realizar la consulta en la base de datos");
 			response.put("error", e.getMessage().concat(": ").concat(e.getMostSpecificCause().getMessage()));
 			return new ResponseEntity<Map<String, Object>>(response, HttpStatus.INTERNAL_SERVER_ERROR);
@@ -50,7 +57,14 @@ public class EstudianteController {
 		Map<String, Object> response = new HashMap<>();
 		try {
 			List<EstudianteDto> estudiantes = new ArrayList<EstudianteDto>();
-
+			
+			if(order == null) {
+				order = "asc";
+			}
+			if(genero == null) {
+				genero = "";
+			}
+			
 			estudiantes = this.estudianteService.findAll(order, genero);
 
 			return new ResponseEntity<List<EstudianteDto>>(estudiantes, HttpStatus.OK);
@@ -99,17 +113,23 @@ public class EstudianteController {
 		}
 	}
 
-//	@PostMapping("/carrera")
-//	public ResponseEntity<?> addEstudianteToCarrera(@RequestParam("nroLibreta") int nroLibreta){
-//		Map<String, Object> response = new HashMap<>();
-//		try {
-//			
-//			return null;
-//		} catch (DataAccessException e) {
-//			response.put("mensaje", "Error al realizar la consulta en la base de datos");
-//			response.put("error", e.getMessage().concat(": ").concat(e.getMostSpecificCause().getMessage()));
-//			return new ResponseEntity<Map<String, Object>>(response, HttpStatus.INTERNAL_SERVER_ERROR);
-//		}
-//	}
+	@PostMapping("/matricular")
+	public ResponseEntity<?> matricularEstudiante(@RequestBody EstudianteCarreraDto estudianteCarrera) {
+		Map<String, Object> response = new HashMap<>();
+		try {
+			EstudianteCarreraDto result = this.estudianteCarreraService.matricularEstudiante(estudianteCarrera);
+
+			if (result == null) {
+				response.put("message", "Hubo un error al matricular el estudiante");
+				return new ResponseEntity<Map<String, Object>>(response, HttpStatus.NOT_FOUND);
+			}
+
+			return new ResponseEntity<EstudianteCarreraDto>(result, HttpStatus.OK);
+		} catch (DataAccessException e) {
+			response.put("mensaje", "Error al realizar la consulta en la base de datos");
+			response.put("error", e.getMessage().concat(": ").concat(e.getMostSpecificCause().getMessage()));
+			return new ResponseEntity<Map<String, Object>>(response, HttpStatus.INTERNAL_SERVER_ERROR);
+		}
+	}
 
 }

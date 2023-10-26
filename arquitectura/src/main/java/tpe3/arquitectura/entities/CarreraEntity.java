@@ -13,7 +13,7 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
-@Table(name="carrera_spring")
+@Table(name="carreras")
 public class CarreraEntity {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
