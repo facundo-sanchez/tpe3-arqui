@@ -51,7 +51,7 @@ public class CarreraController {
 		try {
 			List<CarreraDto> result = this.carreraServiceImpl.findAll();
 
-			return new ResponseEntity<List<CarreraDto>>(result, HttpStatus.CREATED);
+			return new ResponseEntity<List<CarreraDto>>(result, HttpStatus.OK);
 		} catch (DataAccessException e) {
 			response.put("mensaje", "Error al realizar la consulta en la base de datos");
 			response.put("error", e.getMessage().concat(": ").concat(e.getMostSpecificCause().getMessage()));
@@ -69,7 +69,7 @@ public class CarreraController {
 				return new ResponseEntity<Map<String, Object>>(response, HttpStatus.BAD_REQUEST);
 			}
 
-			return new ResponseEntity<CarreraDto>(result, HttpStatus.CREATED);
+			return new ResponseEntity<CarreraDto>(result, HttpStatus.OK);
 		} catch (DataAccessException e) {
 			response.put("mensaje", "Error al realizar la consulta en la base de datos");
 			response.put("error", e.getMessage().concat(": ").concat(e.getMostSpecificCause().getMessage()));
@@ -87,7 +87,7 @@ public class CarreraController {
 				return new ResponseEntity<Map<String, Object>>(response, HttpStatus.BAD_REQUEST);
 			}
 
-			return new ResponseEntity<List<RepuestaCarreraInscriptosDto>>(result, HttpStatus.CREATED);
+			return new ResponseEntity<List<RepuestaCarreraInscriptosDto>>(result, HttpStatus.OK);
 		} catch (DataAccessException e) {
 			response.put("mensaje", "Error al realizar la consulta en la base de datos");
 			response.put("error", e.getMessage().concat(": ").concat(e.getMostSpecificCause().getMessage()));
@@ -105,7 +105,7 @@ public class CarreraController {
 				return new ResponseEntity<Map<String, Object>>(response, HttpStatus.BAD_REQUEST);
 			}
 
-			return new ResponseEntity<List<RespuestaReporteCarreraDto>>(result, HttpStatus.CREATED);
+			return new ResponseEntity<List<RespuestaReporteCarreraDto>>(result, HttpStatus.OK);
 		} catch (DataAccessException e) {
 			response.put("mensaje", "Error al realizar la consulta en la base de datos");
 			response.put("error", e.getMessage().concat(": ").concat(e.getMostSpecificCause().getMessage()));
