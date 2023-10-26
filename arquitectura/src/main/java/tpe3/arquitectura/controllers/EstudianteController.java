@@ -52,19 +52,13 @@ public class EstudianteController {
 
 	// http://localhost:8080/estudiante?order=asc&genero=masculino
 	@GetMapping
-	public ResponseEntity<?> getEstudiantes(@RequestParam(name = "order", required = false) String order,
-			@RequestParam(name = "genero", required = false) String genero) {
+	public ResponseEntity<?> getEstudiantes(
+			@RequestParam(name = "order", required = false, defaultValue = "asc") String order,
+			@RequestParam(name = "genero", required = false, defaultValue = "") String genero) {
 		Map<String, Object> response = new HashMap<>();
 		try {
 			List<EstudianteDto> estudiantes = new ArrayList<EstudianteDto>();
-			
-			if(order == null) {
-				order = "asc";
-			}
-			if(genero == null) {
-				genero = "";
-			}
-			
+
 			estudiantes = this.estudianteService.findAll(order, genero);
 
 			return new ResponseEntity<List<EstudianteDto>>(estudiantes, HttpStatus.OK);
