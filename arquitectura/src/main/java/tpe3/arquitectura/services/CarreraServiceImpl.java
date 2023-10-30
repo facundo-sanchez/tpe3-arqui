@@ -1,6 +1,5 @@
 package tpe3.arquitectura.services;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -72,6 +71,7 @@ public class CarreraServiceImpl implements CarreraService {
 	public List<RepuestaCarreraInscriptosDto> getCarrerasConInscriptos() {
 		try {
 			List<Object[]> result = this.carreraRepository.getCarrerasConInscriptos();
+			System.out.println(result);
 			return CarreraMapper.entityToModelRespuesta(result);
 		} catch (Exception e) {
 			return null;

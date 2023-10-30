@@ -1,11 +1,16 @@
 package tpe3.arquitectura.services;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import tpe3.arquitectura.dto.EstudianteCarreraDto;
+import tpe3.arquitectura.dto.EstudianteDto;
 import tpe3.arquitectura.entities.EstudianteCarreraEntity;
+import tpe3.arquitectura.entities.EstudianteEntity;
 import tpe3.arquitectura.mappers.EstudianteCarreraMapper;
+import tpe3.arquitectura.mappers.EstudianteMapper;
 import tpe3.arquitectura.repository.EstudianteCarreraRepository;
 
 @Service
@@ -26,5 +31,17 @@ public class EstudianteCarreraServiceImpl implements EstudianteCarreraService {
 			return null;
 		}
 	}
+
+//	@Override
+//	public List<EstudianteCarreraDto> getEstudianteByCarreraAndCiudad(String nombreCarrera, String ciudad) {
+//		try {
+//			List<EstudianteEntity> result = this.estudianteCarreraRepository
+//					.getEstudianteByCarreraAndCiudad(nombreCarrera, ciudad);
+//
+//			return EstudianteCarreraMapper.entityListToModelList(result);
+//		} catch (Exception e) {
+//			return null;
+//		}
+//	}
 
 }

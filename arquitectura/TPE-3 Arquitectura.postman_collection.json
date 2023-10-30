@@ -15,7 +15,7 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "{{url}}/estudiante?genero=F&order=asc",
+							"raw": "{{url}}/estudiante?genero=female&order=desc",
 							"host": [
 								"{{url}}"
 							],
@@ -25,11 +25,11 @@
 							"query": [
 								{
 									"key": "genero",
-									"value": "F"
+									"value": "female"
 								},
 								{
 									"key": "order",
-									"value": "asc"
+									"value": "desc"
 								}
 							]
 						}
@@ -68,6 +68,27 @@
 								"estudiante",
 								"nroLibreta",
 								"987654321"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Estudiante by carrera and ciudad",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/estudiante/carrera/Arte/ciudad/Jiaoyuan",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"estudiante",
+								"carrera",
+								"Arte",
+								"ciudad",
+								"Jiaoyuan"
 							]
 						}
 					},

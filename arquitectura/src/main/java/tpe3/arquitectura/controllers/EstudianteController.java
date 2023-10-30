@@ -111,6 +111,20 @@ public class EstudianteController {
 		}
 	}
 
+	@GetMapping("carrera/{carrera}/ciudad/{ciudad}")
+	public ResponseEntity<?> getEstudianteByNroLibreta(@PathVariable String carrera, @PathVariable String ciudad) {
+		Map<String, Object> response = new HashMap<>();
+		try {
+			List<EstudianteDto> result = this.estudianteService.getEstudianteByCarreraAndCiudad(carrera, ciudad);
+
+			return new ResponseEntity<List<EstudianteDto>>(result, HttpStatus.OK);
+		} catch (DataAccessException e) {
+			response.put("mensaje", "Error al realizar la consulta en la base de datos");
+			response.put("error", e.getMessage().concat(": ").concat(e.getMostSpecificCause().getMessage()));
+			return new ResponseEntity<Map<String, Object>>(response, HttpStatus.INTERNAL_SERVER_ERROR);
+		}
+	}
+
 	@PostMapping("/matricular")
 	public ResponseEntity<?> matricularEstudiante(@RequestBody EstudianteCarreraDto estudianteCarrera) {
 		Map<String, Object> response = new HashMap<>();
