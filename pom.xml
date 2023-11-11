@@ -48,6 +48,11 @@
 			<version>8.0.19</version> <!-- Asegúrate de usar la versión adecuada -->
 			<scope>runtime</scope>
 		</dependency>
+		<dependency>
+            <groupId>org.apache.commons</groupId>
+            <artifactId>commons-csv</artifactId>
+            <version>1.9.0</version>
+        </dependency>
 	</dependencies>
 
 	<build>
