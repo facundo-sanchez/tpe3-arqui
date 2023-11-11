@@ -27,16 +27,4 @@ public class EstudianteCarreraServiceImpl implements EstudianteCarreraService {
 		}
 	}
 
-//	@Override
-//	public List<EstudianteCarreraDto> getEstudianteByCarreraAndCiudad(String nombreCarrera, String ciudad) {
-//		try {
-//			List<EstudianteEntity> result = this.estudianteCarreraRepository
-//					.getEstudianteByCarreraAndCiudad(nombreCarrera, ciudad);
-//
-//			return EstudianteCarreraMapper.entityListToModelList(result);
-//		} catch (Exception e) {
-//			return null;
-//		}
-//	}
-
 }

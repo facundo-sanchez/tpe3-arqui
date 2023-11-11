@@ -2,7 +2,7 @@ package tpe3.arquitectura.dto;
 
 import java.io.Serializable;
 
-public class CarreraDto implements Serializable{
+public class CarreraDto implements Serializable {
 	/**
 	 * 
 	 */
@@ -77,7 +77,7 @@ public class CarreraDto implements Serializable{
 	public static long getSerialversionuid() {
 		return serialVersionUID;
 	}
-	
+
 	@Override
 	public String toString() {
 		return "Carrera - " + nombre;

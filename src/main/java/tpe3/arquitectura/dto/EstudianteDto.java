@@ -2,7 +2,7 @@ package tpe3.arquitectura.dto;
 
 import java.io.Serializable;
 
-public class EstudianteDto implements Serializable{
+public class EstudianteDto implements Serializable {
 	/**
 	 * 
 	 */

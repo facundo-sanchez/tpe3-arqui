@@ -14,7 +14,7 @@ import javax.persistence.Table;
 @Entity
 @Table(name = "estudiantes_carreras")
 public class EstudianteCarreraEntity {
-	
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
