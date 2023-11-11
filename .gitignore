@@ -39,3 +39,6 @@ build/
 
 # Maven
 target/
+
+# Carpeta de compilación
+bin/
