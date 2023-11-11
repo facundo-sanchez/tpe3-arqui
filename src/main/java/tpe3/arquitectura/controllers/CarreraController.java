@@ -25,13 +25,13 @@ import tpe3.arquitectura.services.CarreraService;
 public class CarreraController {
 
 	@Autowired
-	private CarreraService carreraServiceImpl;
+	private CarreraService carreraService;
 
 	@PostMapping
 	public ResponseEntity<?> addCarrera(@RequestBody CarreraDto carrera) {
 		Map<String, Object> response = new HashMap<>();
 		try {
-			CarreraDto result = this.carreraServiceImpl.save(carrera);
+			CarreraDto result = this.carreraService.save(carrera);
 			if (result == null) {
 				response.put("message", "Hubo un error al crear la carrera");
 				return new ResponseEntity<Map<String, Object>>(response, HttpStatus.BAD_REQUEST);
@@ -49,7 +49,7 @@ public class CarreraController {
 	public ResponseEntity<?> getCarreras() {
 		Map<String, Object> response = new HashMap<>();
 		try {
-			List<CarreraDto> result = this.carreraServiceImpl.findAll();
+			List<CarreraDto> result = this.carreraService.findAll();
 
 			response.put("total", result.size());
 			response.put("carreras", result);
@@ -66,7 +66,7 @@ public class CarreraController {
 	public ResponseEntity<?> getCarrera(@PathVariable Long id) {
 		Map<String, Object> response = new HashMap<>();
 		try {
-			CarreraDto result = this.carreraServiceImpl.findById(id);
+			CarreraDto result = this.carreraService.findById(id);
 			if (result == null) {
 				response.put("message", "Hubo un error al obtener la carrera con el id " + id);
 				return new ResponseEntity<Map<String, Object>>(response, HttpStatus.BAD_REQUEST);
@@ -84,7 +84,7 @@ public class CarreraController {
 	public ResponseEntity<?> getCarrerasConInscriptos() {
 		Map<String, Object> response = new HashMap<>();
 		try {
-			List<RepuestaCarreraInscriptosDto> result = this.carreraServiceImpl.getCarrerasConInscriptos();
+			List<RepuestaCarreraInscriptosDto> result = this.carreraService.getCarrerasConInscriptos();
 			if (result == null) {
 				response.put("message", "Hubo un al obtener las carreras con inscriptos");
 				return new ResponseEntity<Map<String, Object>>(response, HttpStatus.BAD_REQUEST);
@@ -105,7 +105,7 @@ public class CarreraController {
 	public ResponseEntity<?> getReporteCarreras() {
 		Map<String, Object> response = new HashMap<>();
 		try {
-			List<RespuestaReporteCarreraDto> result = this.carreraServiceImpl.getReportesCarreras();
+			List<RespuestaReporteCarreraDto> result = this.carreraService.getReportesCarreras();
 			if (result == null) {
 				response.put("message", "Hubo un error al generar el reporte de carreras");
 				return new ResponseEntity<Map<String, Object>>(response, HttpStatus.BAD_REQUEST);
