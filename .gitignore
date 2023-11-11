@@ -36,6 +36,7 @@ build/
 .classpath
 .project
 .settings/
+.metadata/
 
 # Maven
 target/
