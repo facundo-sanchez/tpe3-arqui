@@ -13,7 +13,7 @@ Arquitecturas Web - Integrador N°3 (Springboot)
 
 
 # Testing:
-También se incluyó una colección de `Postman` con todos los endpoints requeridos en el trabajo; la misma se encuentra en la carpeta `"recursos/TPE-3 Arquitectura.postman_collection.json"`.
+Se incluyó una colección de `Postman` con todos los endpoints requeridos en el trabajo; la misma se encuentra en la carpeta `"recursos/TPE-3 Arquitectura.postman_collection.json"`.
 
 ![Postman Endpoints](recursos/assets/postman_01.png)
 
