@@ -13,9 +13,9 @@ public interface EstudianteService {
 	public EstudianteDto findByNroLibreta(int nroLibreta);
 
 	public List<EstudianteDto> getEstudianteByCarreraAndCiudad(String nombreCarrera, String ciudad);
-	
+
 	public EstudianteDto save(EstudianteDto estudiante);
 
 	public EstudianteDto delete(int id);
-	
+
 }

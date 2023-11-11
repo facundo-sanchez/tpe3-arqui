@@ -17,9 +17,9 @@ public interface EstudianteRepository extends JpaRepository<EstudianteEntity, Lo
 
 	@Query("SELECT e FROM EstudianteEntity e WHERE e.nroLibretaUnica = :nroLibreta")
 	EstudianteEntity findByNroLibreta(@Param("nroLibreta") int nroLibreta);
-	
-	@Query("SELECT e FROM EstudianteCarreraEntity ce JOIN ce.estudiante e JOIN ce.carrera c WHERE e.ciudad = :ciudad AND c.nombre = :nombreCarrera")
-	List<EstudianteEntity> getEstudianteByCarreraAndCiudad(@Param("nombreCarrera") String nombreCarrera, @Param("ciudad") String ciudad);
 
+	@Query("SELECT e FROM EstudianteCarreraEntity ce JOIN ce.estudiante e JOIN ce.carrera c WHERE e.ciudad = :ciudad AND c.nombre = :nombreCarrera")
+	List<EstudianteEntity> getEstudianteByCarreraAndCiudad(@Param("nombreCarrera") String nombreCarrera,
+			@Param("ciudad") String ciudad);
 
 }

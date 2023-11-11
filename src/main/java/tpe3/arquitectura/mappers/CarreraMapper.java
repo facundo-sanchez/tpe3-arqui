@@ -10,7 +10,6 @@ import tpe3.arquitectura.dto.RepuestaCarreraInscriptosDto;
 import tpe3.arquitectura.dto.RespuestaReporteCarreraDto;
 import tpe3.arquitectura.entities.CarreraEntity;
 
-
 public class CarreraMapper {
 
 	/**
@@ -111,7 +110,7 @@ public class CarreraMapper {
 			if (respuestaCarrera == null) {
 				respuestaCarrera = new RespuestaReporteCarreraDto();
 				CarreraDto carrera = new CarreraDto();
-				
+
 				carrera.setId(id);
 				carrera.setNombre(nombreCarrera);
 				respuestaCarrera.setCarrera(carrera);

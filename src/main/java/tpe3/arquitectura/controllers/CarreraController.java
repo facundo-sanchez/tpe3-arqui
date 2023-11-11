@@ -18,14 +18,14 @@ import org.springframework.web.bind.annotation.RestController;
 import tpe3.arquitectura.dto.CarreraDto;
 import tpe3.arquitectura.dto.RepuestaCarreraInscriptosDto;
 import tpe3.arquitectura.dto.RespuestaReporteCarreraDto;
-import tpe3.arquitectura.services.CarreraServiceImpl;
+import tpe3.arquitectura.services.CarreraService;
 
 @RestController
 @RequestMapping("carrera")
 public class CarreraController {
 
 	@Autowired
-	private CarreraServiceImpl carreraServiceImpl;
+	private CarreraService carreraServiceImpl;
 
 	@PostMapping
 	public ResponseEntity<?> addCarrera(@RequestBody CarreraDto carrera) {

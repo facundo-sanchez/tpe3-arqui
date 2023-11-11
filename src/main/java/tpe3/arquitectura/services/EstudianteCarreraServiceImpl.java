@@ -1,16 +1,11 @@
 package tpe3.arquitectura.services;
 
-import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import tpe3.arquitectura.dto.EstudianteCarreraDto;
-import tpe3.arquitectura.dto.EstudianteDto;
 import tpe3.arquitectura.entities.EstudianteCarreraEntity;
-import tpe3.arquitectura.entities.EstudianteEntity;
 import tpe3.arquitectura.mappers.EstudianteCarreraMapper;
-import tpe3.arquitectura.mappers.EstudianteMapper;
 import tpe3.arquitectura.repository.EstudianteCarreraRepository;
 
 @Service

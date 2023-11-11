@@ -19,18 +19,18 @@ import org.springframework.web.bind.annotation.RestController;
 
 import tpe3.arquitectura.dto.EstudianteCarreraDto;
 import tpe3.arquitectura.dto.EstudianteDto;
-import tpe3.arquitectura.services.EstudianteCarreraServiceImpl;
-import tpe3.arquitectura.services.EstudianteServiceImpl;
+import tpe3.arquitectura.services.EstudianteCarreraService;
+import tpe3.arquitectura.services.EstudianteService;
 
 @RestController
 @RequestMapping("estudiante")
 public class EstudianteController {
 
 	@Autowired
-	private EstudianteServiceImpl estudianteService;
+	private EstudianteService estudianteService;
 
 	@Autowired
-	private EstudianteCarreraServiceImpl estudianteCarreraService;
+	private EstudianteCarreraService estudianteCarreraService;
 
 	@PostMapping
 	public ResponseEntity<?> addEstudiante(@RequestBody EstudianteDto estudiante) {

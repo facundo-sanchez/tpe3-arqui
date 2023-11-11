@@ -57,12 +57,12 @@ public class EstudianteServiceImpl implements EstudianteService {
 		}
 
 	}
-	
+
 	@Override
 	public List<EstudianteDto> getEstudianteByCarreraAndCiudad(String nombreCarrera, String ciudad) {
 		try {
-			List<EstudianteEntity> result = this.estudianteRepository
-					.getEstudianteByCarreraAndCiudad(nombreCarrera, ciudad);
+			List<EstudianteEntity> result = this.estudianteRepository.getEstudianteByCarreraAndCiudad(nombreCarrera,
+					ciudad);
 
 			return EstudianteMapper.entityListToModelList(result);
 		} catch (Exception e) {
